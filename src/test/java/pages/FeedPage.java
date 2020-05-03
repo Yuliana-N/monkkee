@@ -4,23 +4,23 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-public class EntriesPage extends BasePage {
+public class FeedPage extends BasePage {
 
     private static final By SECTION_TAGS = By.id("tags");
 
-    public EntriesPage(WebDriver driver) {
+    public FeedPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
-    public EntriesPage openPage() {
+    public FeedPage openPage() {
         driver.get("https://my.monkkee.com/#/entries");
         return this;
     }
 
     @Override
-    public BasePage isPageOpened() {
-        Assert.assertTrue(driver.findElement(SECTION_TAGS).isDisplayed(),"Page hasn't loaded");
+    public FeedPage isPageOpened() {
+        Assert.assertTrue(driver.findElement(SECTION_TAGS).isDisplayed(), "Page hasn't loaded");
         return this;
     }
 }

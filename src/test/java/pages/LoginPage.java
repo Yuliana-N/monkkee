@@ -48,27 +48,24 @@ public class LoginPage extends BasePage {
         return this;
     }
 
-    public EntriesPage ckickLogin() {
+    public FeedPage clickLogin() {
         loginButton.click();
-        try{
-        driver.findElement(By.cssSelector(".modal")).isDisplayed();
+        try {
+            driver.findElement(By.cssSelector(".modal")).isDisplayed();
             wait.until(ExpectedConditions.elementToBeClickable(CANCEL_BUTTON));
             driver.findElement(CANCEL_BUTTON).click();
-        }
-        catch(NoSuchElementException e) {
+        } catch (NoSuchElementException e) {
             e.printStackTrace();
-            }
-        EntriesPage entries = new EntriesPage(driver);
+        }
+        FeedPage entries = new FeedPage(driver);
         entries.isPageOpened();
-        return new EntriesPage(driver);
+        return new FeedPage(driver);
     }
 
     public void login(User user) {
         writeEmail(user.getEmail());
         writePassword(user.getPassword());
-        ckickLogin();
+        clickLogin();
         AllureUtils.takeScreenshot(driver);
     }
-
-
 }
