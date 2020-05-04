@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 public class EntryPage extends BasePage {
@@ -69,9 +70,9 @@ public class EntryPage extends BasePage {
         return this;
     }
 
-    public EntryPage selectNotAssignedTag(String TextExistTag) {
-        driver.findElement(SELECT_TAG_DROPDOWN).click();
-        driver.findElement(By.xpath(String.format(dropdownFields, TextExistTag)));
+    public EntryPage selectExistTag(String TextExistTag) {
+        Select tags = new Select(driver.findElement(SELECT_TAG_DROPDOWN));
+        tags.selectByVisibleText(TextExistTag);
         return this;
     }
 

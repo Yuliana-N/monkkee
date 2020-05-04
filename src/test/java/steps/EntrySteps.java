@@ -45,7 +45,7 @@ public class EntrySteps {
     @Step("Adding existing tag on entry")
     public EntrySteps selectExistingTag(String TextExistTag) {
         entryPage
-                .selectNotAssignedTag(TextExistTag)
+                .selectExistTag(TextExistTag)
                 .clickAssignedOk();
         return this;
     }

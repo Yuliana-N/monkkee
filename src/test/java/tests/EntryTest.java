@@ -42,6 +42,4 @@ public class EntryTest extends BaseTest {
                 .checkExistingTagHasAdded(textExistTag)
                 .goToFeedPage();
     }
-
-
 }
