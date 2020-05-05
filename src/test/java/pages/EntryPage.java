@@ -18,7 +18,6 @@ public class EntryPage extends BasePage {
     private static final By ASSIGN_EXISTING_TAG_BUTTON = By.id("assign-existing-tag");
     private static final By SELECT_TAG_DROPDOWN = By.id("select-tag");
     String assignedTags = "//p[@class = 'assigned-tags clearfix']//span//a[contains(text(), '%s')]";
-    String dropdownFields = "//select[@class = 'form-control ng-pristine ng-valid']//option[contains(text(), '%s')]";
 
 
     public EntryPage(WebDriver driver) {
@@ -27,7 +26,8 @@ public class EntryPage extends BasePage {
 
     @Override
     public EntryPage openPage() {
-        return null;
+        Assert.assertTrue(driver.findElement(CKE_PANEL_ID).isDisplayed(), "Page hasn't loaded");
+        return this;
     }
 
     @Override
@@ -37,12 +37,12 @@ public class EntryPage extends BasePage {
         return this;
     }
 
-    public EntryPage writeText(String Header, String Text) {
+    public EntryPage writeText(String header, String text) {
         driver.findElement(BOLD_BUTTON).click();
-        driver.findElement(TEXTBOX).sendKeys(Header);
+        driver.findElement(TEXTBOX).sendKeys(header);
         driver.findElement(TEXTBOX).sendKeys(Keys.RETURN);
         driver.findElement(BOLD_BUTTON).click();
-        driver.findElement(TEXTBOX).sendKeys(Text);
+        driver.findElement(TEXTBOX).sendKeys(text);
         return this;
 
     }
@@ -54,9 +54,9 @@ public class EntryPage extends BasePage {
         return new FeedPage(driver);
     }
 
-    public EntryPage writeTextToTag(String TextTag) {
+    public EntryPage writeTextToTag(String textTag) {
         driver.findElement(NEW_TAG_INPUT).click();
-        driver.findElement(NEW_TAG_INPUT).sendKeys(TextTag);
+        driver.findElement(NEW_TAG_INPUT).sendKeys(textTag);
         return this;
     }
 
@@ -65,14 +65,14 @@ public class EntryPage extends BasePage {
         return this;
     }
 
-    public EntryPage checkThatTagIsVisibleInAssignTags(String TextTag) {
-        Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, TextTag))).isDisplayed(), "Не работает нихера");
+    public EntryPage checkThatTagIsVisibleInAssignTags(String textTag) {
+        Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, textTag))).isDisplayed(), "Не работает нихера");
         return this;
     }
 
-    public EntryPage selectExistTag(String TextExistTag) {
+    public EntryPage selectExistTag(String textExistTag) {
         Select tags = new Select(driver.findElement(SELECT_TAG_DROPDOWN));
-        tags.selectByVisibleText(TextExistTag);
+        tags.selectByVisibleText(textExistTag);
         return this;
     }
 

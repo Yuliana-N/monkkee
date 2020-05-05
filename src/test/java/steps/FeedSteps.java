@@ -36,8 +36,14 @@ public class FeedSteps {
     public FeedSteps deleteEntry() {
         feedPage
                 .clickDeleteButton()
-                .clickAlert()
-                .checkAmountOfEntriesAfterActionOnEntries(-1);
+                .clickAlert();
+        return this;
+    }
+
+    @Step("Check amount of entries after deliting")
+    public FeedSteps checkAmountOfEntriesAfterDeliting() {
+        feedPage
+                .checkAmountOfEntriesAfterDeleteOneEntry();
         return this;
     }
 
@@ -49,7 +55,7 @@ public class FeedSteps {
     }
 
     @Step("Deliting all entries {AmountOfEntries}")
-    public FeedSteps deleteEntries() {
+    public FeedSteps deleteAllEntries() {
         feedPage
                 .clickDeleteButton()
                 .clickAlert()

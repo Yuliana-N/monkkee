@@ -30,7 +30,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void setDriver(ITestContext context) {
-        context.setAttribute("driver", driver);
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().timeouts().implicitlyWait(timeOutSeconds, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -40,6 +39,7 @@ public class BaseTest {
         loginSteps = new LoginSteps(driver);
         feedSteps = new FeedSteps(driver);
         entrySteps = new EntrySteps(driver);
+        context.setAttribute("driver", driver);
     }
 
     @AfterMethod(alwaysRun = true)

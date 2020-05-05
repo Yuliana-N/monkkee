@@ -23,7 +23,8 @@ public class FeedTest extends BaseTest {
                 .openPage();
         entrySteps
                 .createEntry(header, text)
-                .goToFeedPage();
+                .goToFeedPage()
+                .checkAmountOfEntries();
     }
 
     @Test(priority = 2, description = "Проверка удаления записи из дневника")
@@ -35,7 +36,8 @@ public class FeedTest extends BaseTest {
         feedSteps
                 .openPage()
                 .selectEntryByCheckCheckbox(numberOfEntry)
-                .deleteEntry();
+                .deleteEntry()
+                .checkAmountOfEntriesAfterDeliting();
     }
 
     @Test(priority = 5, description = "Проверка удаления всех записей из дневника")
@@ -47,6 +49,6 @@ public class FeedTest extends BaseTest {
         feedSteps
                 .openPage()
                 .getAllEntryByCheckCheckbox()
-                .deleteEntries();
+                .deleteAllEntries();
     }
 }

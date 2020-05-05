@@ -25,7 +25,8 @@ public class EntryTest extends BaseTest {
                 .createEntry(header, text)
                 .createTag(textTag)
                 .addTagAndCheck(textTag)
-                .goToFeedPage();
+                .goToFeedPage()
+                .checkAmountOfEntries();
     }
 
     @Test(priority = 4, description = "Проверка добавления существующего тега к записи")
@@ -40,6 +41,7 @@ public class EntryTest extends BaseTest {
                 .createEntry(header, text)
                 .selectExistingTag(textExistTag)
                 .checkExistingTagHasAdded(textExistTag)
-                .goToFeedPage();
+                .goToFeedPage()
+                .checkAmountOfEntries();
     }
 }
