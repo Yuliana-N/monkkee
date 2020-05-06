@@ -2,11 +2,27 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-public class FeedPage extends BasePage {
+import java.util.List;
 
+import static org.testng.Assert.assertEquals;
+
+public class FeedPage extends BasePage {
+    int entriesAmount;
+    int entriesAmountAfterAction;
     private static final By SECTION_TAGS = By.id("tags");
+    private static final By CREATE_ENTRY_BUTTON = By.id("create-entry");
+    private static final By ENTRY = By.cssSelector(".entry-container");
+    private static final By DELETE_ENTRY_BUTTON = By.id("delete-entries");
+    private static final By CHECKBOX = By.xpath("//*[@ng-change = 'updateSelectionState()']");
+    private static final By CHECKBOX_ALL_ENTRIES = By.xpath("//*[@ng-change = 'selectOrUnselectAll()']");
+    String classDisabled = "//div[@class = 'btn-toolbar']//a[contains(@class, 'disabled')]";
+    String checkboxSelected = "//div[(@class = 'checkbox-wrapper')]//input[@class = 'ng-valid ng-dirty']";
+    String descriptionVisible = "//div[(@class = 'none centered')]";
+
 
     public FeedPage(WebDriver driver) {
         super(driver);
@@ -23,4 +39,66 @@ public class FeedPage extends BasePage {
         Assert.assertTrue(driver.findElement(SECTION_TAGS).isDisplayed(), "Page hasn't loaded");
         return this;
     }
+
+    public EntryPage clickNewEntry() {
+        driver.findElement(CREATE_ENTRY_BUTTON).click();
+        EntryPage entries = new EntryPage(driver);
+        entries.isPageOpened();
+        return new EntryPage(driver);
+    }
+
+    public FeedPage clickDeleteButton() {
+        while (true) {
+            if (driver.findElements(By.xpath(classDisabled)).size() == 0)
+                break;
+        }
+        driver.findElement(DELETE_ENTRY_BUTTON).click();
+
+        return this;
+    }
+
+    public FeedPage ckickAllEntriesCheckbox() {
+        driver.findElement(CHECKBOX_ALL_ENTRIES).click();
+        return this;
+    }
+
+    public FeedPage checkAmountOfEntries() {
+        List<WebElement> entries = driver.findElements(ENTRY);
+        entriesAmount = entries.size();
+        return this;
+    }
+
+    public FeedPage checkAmountOfEntriesAfterAddingEntry() {
+        List<WebElement> entriesAfterAdding = driver.findElements(ENTRY);
+        entriesAmountAfterAction = entriesAfterAdding.size();
+        assertEquals(entriesAmountAfterAction, entriesAmount + 1, "Entry hasn't added");
+        return this;
+    }
+
+    public FeedPage checkAmountOfEntriesAfterDeleteOneEntry() {
+        wait.until(ExpectedConditions.invisibilityOf(driver.findElement(By.xpath(checkboxSelected))));
+        List<WebElement> entriesAfterAdding = driver.findElements(ENTRY);
+        entriesAmountAfterAction = entriesAfterAdding.size();
+        assertEquals(entriesAmountAfterAction, entriesAmount - 1, "Entry hasn't deleted");
+        return this;
+    }
+
+    public FeedPage getListOfCheckBoxAndClickOneCheckbox(int entryNumber) {
+        List<WebElement> checkboxes = driver.findElements(CHECKBOX);
+        checkboxes.get(entryNumber - 1).click();
+        return this;
+    }
+
+    public FeedPage checkAmountOfEntriesIsNull() {
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(descriptionVisible))));
+        List<WebElement> entriesAfterAdding = driver.findElements(ENTRY);
+        Assert.assertEquals(entriesAfterAdding.size(), 0, "Entries haven't deleted");
+        return this;
+    }
+
+    public FeedPage clickAlert() {
+        driver.switchTo().alert().accept();
+        return this;
+    }
+
 }
