@@ -49,7 +49,6 @@ workflows:
           filters:
             branches:
               only:
-              - master
-              - entries_tests
+                - master
     jobs:
       - ui-tests
