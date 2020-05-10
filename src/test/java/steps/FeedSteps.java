@@ -62,4 +62,11 @@ public class FeedSteps {
                 .checkAmountOfEntriesIsNull();
         return this;
     }
+
+    @Step("Check that tag is on the entry on feed page")
+    public FeedSteps checkThatTagOnTheEntry(String textTag) {
+        feedPage
+                .findLastEntryAndCheckThatTagOnTheEntry(textTag);
+        return this;
+    }
 }

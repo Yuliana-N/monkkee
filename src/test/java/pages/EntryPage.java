@@ -66,7 +66,7 @@ public class EntryPage extends BasePage {
     }
 
     public EntryPage checkThatTagIsVisibleInAssignTags(String textTag) {
-        Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, textTag))).isDisplayed(), "Не работает нихера");
+        Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, textTag))).isDisplayed(), "There is no tag in the assigned tags field ");
         return this;
     }
 
@@ -80,5 +80,4 @@ public class EntryPage extends BasePage {
         driver.findElement(ASSIGN_EXISTING_TAG_BUTTON).click();
         return this;
     }
-
 }
