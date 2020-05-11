@@ -84,9 +84,8 @@ public class FeedPage extends BasePage {
         return this;
     }
 
-    public FeedPage getListOfCheckBoxAndClickOneCheckbox(int entryNumber) {
-        List<WebElement> checkboxes = driver.findElements(CHECKBOX);
-        checkboxes.get(entryNumber - 1).click();
+    public FeedPage getListOfCheckBoxAndClickOneCheckbox() {
+        driver.findElement(CHECKBOX).click();
         return this;
     }
 

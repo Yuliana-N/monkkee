@@ -25,10 +25,10 @@ public class FeedSteps {
     }
 
     @Step("Select entry with number {entryNumber}")
-    public FeedSteps selectEntryByCheckCheckbox(int entryNumber) {
+    public FeedSteps selectEntryByCheckCheckbox() {
         feedPage
                 .checkAmountOfEntries()
-                .getListOfCheckBoxAndClickOneCheckbox(entryNumber);
+                .getListOfCheckBoxAndClickOneCheckbox();
         return this;
     }
 

@@ -22,7 +22,8 @@ public class SearchModalPage extends BasePage {
 
     @Override
     public BasePage openPage() {
-        return null;
+        driver.get("https://my.monkkee.com/#/entries");
+        return this;
     }
 
     @Override

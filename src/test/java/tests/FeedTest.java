@@ -9,7 +9,6 @@ public class FeedTest extends BaseTest {
 
     String header = "Заголовок";
     String text = "Тело";
-    int numberOfEntry = 2;
     String email = "monkkee_bloger@mailinator.com";
     String password = "QWERty123";
 
@@ -35,7 +34,7 @@ public class FeedTest extends BaseTest {
                 .login(user);
         feedSteps
                 .openPage()
-                .selectEntryByCheckCheckbox(numberOfEntry)
+                .selectEntryByCheckCheckbox()
                 .deleteEntry()
                 .checkAmountOfEntriesAfterDeliting();
     }
