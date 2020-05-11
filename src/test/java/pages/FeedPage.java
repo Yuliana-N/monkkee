@@ -19,6 +19,7 @@ public class FeedPage extends BasePage {
     private static final By DELETE_ENTRY_BUTTON = By.id("delete-entries");
     private static final By CHECKBOX = By.xpath("//*[@ng-change = 'updateSelectionState()']");
     private static final By CHECKBOX_ALL_ENTRIES = By.xpath("//*[@ng-change = 'selectOrUnselectAll()']");
+    private static final By TAG_ON_THE_ENTRY = By.xpath("//span[@class = 'tag ng-binding ng-scope']");
     String classDisabled = "//div[@class = 'btn-toolbar']//a[contains(@class, 'disabled')]";
     String checkboxSelected = "//div[(@class = 'checkbox-wrapper')]//input[@class = 'ng-valid ng-dirty']";
     String descriptionVisible = "//div[(@class = 'none centered')]";
@@ -96,9 +97,14 @@ public class FeedPage extends BasePage {
         return this;
     }
 
+    public FeedPage findLastEntryAndCheckThatTagOnTheEntry(String textTag) {
+        List<WebElement> allEntriesOnPage = driver.findElements(ENTRY);
+        Assert.assertTrue(allEntriesOnPage.get(0).findElement(TAG_ON_THE_ENTRY).getText().contains(textTag),"There is no tags"+ textTag +"on the Entry");
+        return this;
+    }
+
     public FeedPage clickAlert() {
         driver.switchTo().alert().accept();
         return this;
     }
-
 }
