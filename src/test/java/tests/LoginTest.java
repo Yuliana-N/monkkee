@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
 
-    @Test(description = "Авторизация на сайте")
+    @Test(priority = 1, description = "Авторизация на сайте")
     @Link("https://my.monkkee.com/#/")
     public void login() {
         User user = new User("monkkee_bloger@mailinator.com", "QWERty123");

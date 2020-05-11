@@ -13,7 +13,7 @@ public class FeedTest extends BaseTest {
     String email = "monkkee_bloger@mailinator.com";
     String password = "QWERty123";
 
-    @Test(priority = 1, description = "Проверка добавления записи в дневник ")
+    @Test(priority = 2, description = "Проверка добавления записи в дневник ")
     @Description("Проверка добавления записи в дневник")
     public void checkAddingEntry() {
         User user = new User(email, password);
@@ -27,7 +27,7 @@ public class FeedTest extends BaseTest {
                 .checkAmountOfEntries();
     }
 
-    @Test(priority = 2, description = "Проверка удаления записи из дневника")
+    @Test(priority = 3, description = "Проверка удаления записи из дневника")
     @Description("Проверка удаления записи из дневника")
     public void checkDeletingEntry() {
         User user = new User(email, password);
@@ -40,7 +40,7 @@ public class FeedTest extends BaseTest {
                 .checkAmountOfEntriesAfterDeliting();
     }
 
-    @Test(priority = 5, description = "Проверка удаления всех записей из дневника")
+    @Test(priority = 6, description = "Проверка удаления всех записей из дневника")
     @Description("Проверка удаления всех записей из дневника")
     public void checkDeletingAllEntries() {
         User user = new User(email, password);
