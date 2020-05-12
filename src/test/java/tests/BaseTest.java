@@ -16,6 +16,7 @@ import steps.FeedSteps;
 import steps.LoginSteps;
 import steps.SearchModalSteps;
 import utils.CapabilitiesGenerator;
+import utils.DataCreator;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
@@ -32,6 +33,7 @@ public class BaseTest {
     EntrySteps entrySteps;
     SearchModalSteps searchModalSteps;
     int timeOutSeconds = 20;
+    DataCreator data = new DataCreator();
 
     @BeforeMethod
     public void setDriver(ITestContext context) {
@@ -46,6 +48,7 @@ public class BaseTest {
         entrySteps = new EntrySteps(driver);
         searchModalPage = new SearchModalPage(driver);
         searchModalSteps = new SearchModalSteps(driver);
+        data = new DataCreator();
         context.setAttribute("driver", driver);
     }
 

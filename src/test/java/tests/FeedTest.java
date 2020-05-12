@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 public class FeedTest extends BaseTest {
 
-    String header = "Заголовок";
-    String text = "Тело";
+    String header = data.getFakeHeader();
+    String text = data.getFakeEntryText();
     String email = "monkkee_bloger@mailinator.com";
     String password = "QWERty123";
 
@@ -48,6 +48,7 @@ public class FeedTest extends BaseTest {
         feedSteps
                 .openPage()
                 .getAllEntryByCheckCheckbox()
-                .deleteAllEntries();
+                .deleteAllEntries()
+                .checkAmountOfEntriesAfterDeletingAllEntries();
     }
 }

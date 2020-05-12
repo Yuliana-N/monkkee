@@ -6,7 +6,7 @@ import models.User;
 import org.testng.annotations.Test;
 
 public class SearchTest extends BaseTest {
-    String text = "travel";
+    String text = data.getFakeTextToSearch();
     String email = "monkkee_goodblogger@mailinator.com";
     String password = "QWERty123";
 
