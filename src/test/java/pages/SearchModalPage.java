@@ -54,16 +54,21 @@ public class SearchModalPage extends BasePage {
 
     public SearchModalPage checkListOfEntriesContainsSearchText(String textForSearch) {
         int sizeOfEntriesWithNecessaryText = 0;
-        List<WebElement> entriesAfterAdding = driver.findElements(ENTRY);
-        for (int i = 0; i < entriesAfterAdding.size(); i++) {
-            String entryText = entriesAfterAdding.get(i).getText().toLowerCase();
-            boolean isEquals = entryText.contains(textForSearch.toLowerCase());
-            if (isEquals) {
-                sizeOfEntriesWithNecessaryText = sizeOfEntriesWithNecessaryText + 1;
+            List<WebElement> entriesAfterAdding = driver.findElements(ENTRY);
+            if(entriesAfterAdding.size() > 0) {
+                for (int i = 0; i < entriesAfterAdding.size(); i++) {
+                    String entryText = entriesAfterAdding.get(i).getText().toLowerCase();
+                    boolean isEquals = entryText.contains(textForSearch.toLowerCase());
+                    if (isEquals) {
+                        sizeOfEntriesWithNecessaryText = sizeOfEntriesWithNecessaryText + 1;
+                    }
+                }
+                System.out.println(sizeOfEntriesWithNecessaryText);
+                Assert.assertEquals(sizeOfEntriesWithNecessaryText, entriesAfterAdding.size(), "The number of records does not match the number of records with the required text");
             }
-        }
-        System.out.println(sizeOfEntriesWithNecessaryText);
-        Assert.assertEquals(sizeOfEntriesWithNecessaryText, entriesAfterAdding.size(), "The number of records does not match the number of records with the required text");
-        return this;
+            else {
+                Assert.fail("No records found for this request");
+            }
+       return this;
     }
 }

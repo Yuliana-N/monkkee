@@ -28,7 +28,7 @@ public class FeedSteps {
     public FeedSteps selectEntryByCheckCheckbox() {
         feedPage
                 .checkAmountOfEntries()
-                .getListOfCheckBoxAndClickOneCheckbox();
+                .clickOneCheckbox();
         return this;
     }
 
@@ -58,7 +58,12 @@ public class FeedSteps {
     public FeedSteps deleteAllEntries() {
         feedPage
                 .clickDeleteButton()
-                .clickAlert()
+                .clickAlert();
+        return this;
+    }
+    @Step("Check amount of entries after deleting all entries")
+    public FeedSteps checkAmountOfEntriesAfterDeletingAllEntries(){
+        feedPage
                 .checkAmountOfEntriesIsNull();
         return this;
     }
