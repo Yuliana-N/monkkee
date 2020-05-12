@@ -1,5 +1,6 @@
 package tests;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
@@ -9,10 +10,13 @@ import org.testng.annotations.Listeners;
 import pages.EntryPage;
 import pages.FeedPage;
 import pages.LoginPage;
+import pages.SearchModalPage;
 import steps.EntrySteps;
 import steps.FeedSteps;
 import steps.LoginSteps;
+import steps.SearchModalSteps;
 import utils.CapabilitiesGenerator;
+import utils.DataCreator;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
@@ -23,10 +27,13 @@ public class BaseTest {
     LoginPage loginPage;
     FeedPage feedPage;
     EntryPage entryPage;
+    SearchModalPage searchModalPage;
     LoginSteps loginSteps;
     FeedSteps feedSteps;
     EntrySteps entrySteps;
+    SearchModalSteps searchModalSteps;
     int timeOutSeconds = 20;
+    DataCreator data = new DataCreator();
 
     @BeforeMethod
     public void setDriver(ITestContext context) {
@@ -39,6 +46,9 @@ public class BaseTest {
         loginSteps = new LoginSteps(driver);
         feedSteps = new FeedSteps(driver);
         entrySteps = new EntrySteps(driver);
+        searchModalPage = new SearchModalPage(driver);
+        searchModalSteps = new SearchModalSteps(driver);
+        data = new DataCreator();
         context.setAttribute("driver", driver);
     }
 

@@ -5,15 +5,15 @@ import models.User;
 import org.testng.annotations.Test;
 
 public class EntryTest extends BaseTest {
-    String header = "Заголовок";
-    String text = "Тело";
+    String header = data.getFakeHeader();
+    String text = data.getFakeEntryText();
     String email = "monkkee_bloger@mailinator.com";
     String password = "QWERty123";
-    String textTag = "row";
+    String textTag = data.getFakeTag();
     String textExistTag = "animals";
 
 
-    @Test(priority = 3, description = "Проверка добавления нового тега к записи")
+    @Test(priority = 4, description = "Проверка добавления нового тега к записи")
     @Description("Проверка добавления нового тега к записи")
     public void checkAddingNewTag() {
         User user = new User(email, password);
@@ -32,7 +32,7 @@ public class EntryTest extends BaseTest {
 
     }
 
-    @Test(priority = 4, description = "Проверка добавления существующего тега к записи")
+    @Test(priority = 5, description = "Проверка добавления существующего тега к записи")
     @Description("Проверка добавления существующего тега к записи")
     public void checkAddingExistingTag() {
         User user = new User(email, password);

@@ -54,12 +54,16 @@ public class FeedPage extends BasePage {
                 break;
         }
         driver.findElement(DELETE_ENTRY_BUTTON).click();
-
         return this;
     }
 
     public FeedPage ckickAllEntriesCheckbox() {
-        driver.findElement(CHECKBOX_ALL_ENTRIES).click();
+        if (checkAmountOfEntries().entriesAmount > 0) {
+            driver.findElement(CHECKBOX_ALL_ENTRIES).click();
+        }
+        else {
+            Assert.fail("There is no entries found");
+        }
         return this;
     }
 
@@ -84,9 +88,12 @@ public class FeedPage extends BasePage {
         return this;
     }
 
-    public FeedPage getListOfCheckBoxAndClickOneCheckbox(int entryNumber) {
-        List<WebElement> checkboxes = driver.findElements(CHECKBOX);
-        checkboxes.get(entryNumber - 1).click();
+    public FeedPage clickOneCheckbox() {
+        if (checkAmountOfEntries().entriesAmount > 0) {
+            driver.findElement(CHECKBOX).click();
+        } else {
+            Assert.fail("There is no entries for deleting");
+        }
         return this;
     }
 
@@ -99,7 +106,7 @@ public class FeedPage extends BasePage {
 
     public FeedPage findLastEntryAndCheckThatTagOnTheEntry(String textTag) {
         List<WebElement> allEntriesOnPage = driver.findElements(ENTRY);
-        Assert.assertTrue(allEntriesOnPage.get(0).findElement(TAG_ON_THE_ENTRY).getText().contains(textTag),"There is no tags"+ textTag +"on the Entry");
+        Assert.assertTrue(allEntriesOnPage.get(0).findElement(TAG_ON_THE_ENTRY).getText().contains(textTag), "There is no tags" + textTag + "on the Entry");
         return this;
     }
 
