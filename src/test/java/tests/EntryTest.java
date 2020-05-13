@@ -10,7 +10,6 @@ public class EntryTest extends BaseTest {
     String email = "monkkee_bloger@mailinator.com";
     String password = "QWERty123";
     String textTag = data.getFakeTag();
-    String textExistTag = "animals";
 
 
     @Test(priority = 4, description = "Проверка добавления нового тега к записи")
@@ -41,7 +40,9 @@ public class EntryTest extends BaseTest {
         feedSteps
                 .openPage();
         entrySteps
-                .createEntry(header, text)
+                .createEntry(header, text);
+        String textExistTag = entryPage.getRandomElement();
+        entrySteps
                 .selectExistingTag(textExistTag)
                 .checkExistingTagHasAdded(textExistTag)
                 .goToFeedPage();

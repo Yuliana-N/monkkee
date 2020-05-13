@@ -3,9 +3,14 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class EntryPage extends BasePage {
 
@@ -17,8 +22,8 @@ public class EntryPage extends BasePage {
     private static final By CREATE_NEW_TAG_BUTTON = By.id("assign-new-tag");
     private static final By ASSIGN_EXISTING_TAG_BUTTON = By.id("assign-existing-tag");
     private static final By SELECT_TAG_DROPDOWN = By.id("select-tag");
+    private static final By TAGS_IN_LIST = By.xpath("//*[@id = 'select-tag']/option");
     String assignedTags = "//p[@class = 'assigned-tags clearfix']//span//a[contains(text(), '%s')]";
-
 
     public EntryPage(WebDriver driver) {
         super(driver);
@@ -79,5 +84,17 @@ public class EntryPage extends BasePage {
     public EntryPage clickAssignedOk() {
         driver.findElement(ASSIGN_EXISTING_TAG_BUTTON).click();
         return this;
+    }
+    public String getRandomElement() {
+        List<WebElement> list = driver.findElements(TAGS_IN_LIST);
+        List<String> values = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < list.size(); i++) {
+            String tag = list.get(i).getText();
+            values.add(tag);
+        }
+        int index = random.nextInt(values.size());
+        String randomStringTag = values.get(index);
+        return randomStringTag;
     }
 }
