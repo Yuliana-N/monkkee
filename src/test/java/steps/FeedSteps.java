@@ -61,14 +61,15 @@ public class FeedSteps {
                 .clickAlert();
         return this;
     }
+
     @Step("Check amount of entries after deleting all entries")
-    public FeedSteps checkAmountOfEntriesAfterDeletingAllEntries(){
+    public FeedSteps checkAmountOfEntriesAfterDeletingAllEntries() {
         feedPage
                 .checkAmountOfEntriesIsNull();
         return this;
     }
 
-    @Step("Check that tag is on the entry on feed page")
+    @Step("Check that tag tag with name = '{textTag}' is on the entry on feed page")
     public FeedSteps checkThatTagOnTheEntry(String textTag) {
         feedPage
                 .findLastEntryAndCheckThatTagOnTheEntry(textTag);

@@ -1,9 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import lombok.extern.log4j.Log4j2;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -12,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+@Log4j2
 public class EntryPage extends BasePage {
 
     private static final By CKE_PANEL_ID = By.id("cke_editable");
@@ -31,6 +30,7 @@ public class EntryPage extends BasePage {
 
     @Override
     public EntryPage openPage() {
+        log.info("Opening Entry page");
         Assert.assertTrue(driver.findElement(CKE_PANEL_ID).isDisplayed(), "Page hasn't loaded");
         return this;
     }
@@ -43,6 +43,7 @@ public class EntryPage extends BasePage {
     }
 
     public EntryPage writeText(String header, String text) {
+        log.info("Write text to entry");
         driver.findElement(BOLD_BUTTON).click();
         driver.findElement(TEXTBOX).sendKeys(header);
         driver.findElement(TEXTBOX).sendKeys(Keys.RETURN);
@@ -61,6 +62,7 @@ public class EntryPage extends BasePage {
 
     public EntryPage writeTextToTag(String textTag) {
         driver.findElement(NEW_TAG_INPUT).click();
+        log.info("Writing text to tag field " + textTag);
         driver.findElement(NEW_TAG_INPUT).sendKeys(textTag);
         return this;
     }
@@ -71,13 +73,19 @@ public class EntryPage extends BasePage {
     }
 
     public EntryPage checkThatTagIsVisibleInAssignTags(String textTag) {
-        Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, textTag))).isDisplayed(), "There is no tag in the assigned tags field ");
+        log.info("Checking that tag is visible in modal \"Assign tags\"");
+        try {
+            Assert.assertTrue(driver.findElement(By.xpath(String.format(assignedTags, textTag))).isDisplayed(), "There is no tag in the assigned tags field");
+        } catch (NoSuchElementException ex) {
+            ex.getStackTrace();
+        }
         return this;
     }
 
     public EntryPage selectExistTag(String textExistTag) {
         Select tags = new Select(driver.findElement(SELECT_TAG_DROPDOWN));
         tags.selectByVisibleText(textExistTag);
+        log.info("Selected a tag with a name " + textExistTag);
         return this;
     }
 
@@ -85,16 +93,20 @@ public class EntryPage extends BasePage {
         driver.findElement(ASSIGN_EXISTING_TAG_BUTTON).click();
         return this;
     }
+
     public String getRandomElement() {
         List<WebElement> list = driver.findElements(TAGS_IN_LIST);
+        log.info("Created a list of elements in the dropdown of existing tags with size: " + list.size());
         List<String> values = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < list.size(); i++) {
             String tag = list.get(i).getText();
             values.add(tag);
         }
+        log.info("Created a list of names existing tags with size: " + values.size());
         int index = random.nextInt(values.size());
         String randomStringTag = values.get(index);
+        log.info("Select random tag fronm list og tags: " + randomStringTag);
         return randomStringTag;
     }
 }

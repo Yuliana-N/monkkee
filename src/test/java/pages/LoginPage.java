@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.extern.log4j.Log4j2;
 import models.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 
+@Log4j2
 public class LoginPage extends BasePage {
 
     private static final By CANCEL_BUTTON = By.xpath("//*[text() = 'Cancel']");
@@ -28,11 +30,13 @@ public class LoginPage extends BasePage {
     }
 
     public LoginPage isPageOpened() {
+        log.info("Login page opened");
         wait.until(ExpectedConditions.visibilityOf(loginButton));
         return this;
     }
 
     public LoginPage openPage() {
+        log.info("Opening LoginPage page");
         driver.get("https://my.monkkee.com/");
         isPageOpened();
         return this;
@@ -50,11 +54,14 @@ public class LoginPage extends BasePage {
 
     public FeedPage clickLogin() {
         loginButton.click();
+        log.info("Сhecking that the module \"Feed the monkkee\" has opened");
         try {
             driver.findElement(By.cssSelector(".modal")).isDisplayed();
             wait.until(ExpectedConditions.elementToBeClickable(CANCEL_BUTTON));
+            log.info("Closing \"Feed the monkkee\" modal and login");
             driver.findElement(CANCEL_BUTTON).click();
         } catch (NoSuchElementException e) {
+            log.warn("The module \"Feed the monkkee\" hasn't opened");
             e.printStackTrace();
         }
         FeedPage entries = new FeedPage(driver);
@@ -66,6 +73,7 @@ public class LoginPage extends BasePage {
         writeEmail(user.getEmail());
         writePassword(user.getPassword());
         clickLogin();
+        log.info("Login with user" + user.getEmail() + "and password" + user.getPassword());
         AllureUtils.takeScreenshot(driver);
     }
 }

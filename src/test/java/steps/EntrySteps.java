@@ -14,7 +14,7 @@ public class EntrySteps {
         feedPage = new FeedPage(driver);
     }
 
-    @Step("Creating new entry with Header='{header}' Text='{text}'")
+    @Step("Creating new entry with parameters header:'{header}' and text:'{text}'")
     public EntrySteps createEntry(String header, String text) {
         feedPage
                 .checkAmountOfEntries()
@@ -25,7 +25,7 @@ public class EntrySteps {
         return this;
     }
 
-    @Step("Creating new tag on entry page")
+    @Step("Creating new tag with random name : '{textTag}' on entry page ")
     public EntrySteps createTag(String textTag) {
         entryPage
                 .writeTextToTag(textTag);
@@ -33,7 +33,7 @@ public class EntrySteps {
         return this;
     }
 
-    @Step("Adding new tag on entry and checking")
+    @Step("Adding new tag with random name : '{textTag}' on entry and checking")
     public EntrySteps addTagAndCheck(String textTag) {
         entryPage
                 .clickOk()
