@@ -42,7 +42,7 @@ public class EntrySteps {
         return this;
     }
 
-    @Step("Adding existing tag on entry")
+    @Step("Adding existing tag on entry '{textExistTag}'")
     public EntrySteps selectExistingTag(String textExistTag) {
         entryPage
                 .selectExistTag(textExistTag)

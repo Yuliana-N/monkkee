@@ -15,7 +15,7 @@ public class LoginSteps {
         feedPage = new FeedPage(driver);
     }
 
-    @Step("Login by user {user.email}")
+    @Step("Login by user '{user.email}'")
     public void login(User user) {
         loginPage
                 .openPage()

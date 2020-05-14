@@ -11,6 +11,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import utils.AllureUtils;
 
+import java.util.List;
+
 @Log4j2
 public class LoginPage extends BasePage {
 
@@ -54,15 +56,13 @@ public class LoginPage extends BasePage {
 
     public FeedPage clickLogin() {
         loginButton.click();
-        log.info("Сhecking that the module \"Feed the monkkee\" has opened");
-        try {
-            driver.findElement(By.cssSelector(".modal")).isDisplayed();
+        List<WebElement> modal = driver.findElements(By.cssSelector(".modal"));
+        log.info("Checking that \"Feed the monkkee\" modal is opened or not");
+        if(modal.size() > 0){
+            log.info("\"Feed the monkkee\" modal is opened");
             wait.until(ExpectedConditions.elementToBeClickable(CANCEL_BUTTON));
             log.info("Closing \"Feed the monkkee\" modal and login");
             driver.findElement(CANCEL_BUTTON).click();
-        } catch (NoSuchElementException e) {
-            log.warn("The module \"Feed the monkkee\" hasn't opened");
-            e.printStackTrace();
         }
         FeedPage entries = new FeedPage(driver);
         entries.isPageOpened();
