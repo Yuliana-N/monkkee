@@ -24,7 +24,7 @@ public class FeedSteps {
         return this;
     }
 
-    @Step("Select entry with number {entryNumber}")
+    @Step("Select entry ")
     public FeedSteps selectEntryByCheckCheckbox() {
         feedPage
                 .checkAmountOfEntries()
@@ -32,7 +32,7 @@ public class FeedSteps {
         return this;
     }
 
-    @Step("Deliting entry")
+    @Step("Deleting entry")
     public FeedSteps deleteEntry() {
         feedPage
                 .clickDeleteButton()
@@ -40,7 +40,7 @@ public class FeedSteps {
         return this;
     }
 
-    @Step("Check amount of entries after deliting")
+    @Step("Check amount of entries after deleting")
     public FeedSteps checkAmountOfEntriesAfterDeliting() {
         feedPage
                 .checkAmountOfEntriesAfterDeleteOneEntry();
@@ -54,7 +54,7 @@ public class FeedSteps {
         return this;
     }
 
-    @Step("Deliting all entries {AmountOfEntries}")
+    @Step("Deleting all entries '{AmountOfEntries}'")
     public FeedSteps deleteAllEntries() {
         feedPage
                 .clickDeleteButton()
