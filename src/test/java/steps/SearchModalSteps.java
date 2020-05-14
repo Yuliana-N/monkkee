@@ -32,7 +32,7 @@ public class SearchModalSteps {
         return this;
     }
 
-    @Step("Create list of entries and check it contains necessary text {textForSearch}")
+    @Step("Create list of entries and check it contains necessary text: {textForSearch}")
     public SearchModalSteps createListOfEntriesAndCheckText(String textForSearch) {
         searchModalPage
                 .checkListOfEntriesContainsSearchText(textForSearch);

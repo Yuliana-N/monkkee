@@ -5,6 +5,7 @@ import models.User;
 import org.testng.annotations.Test;
 
 public class EntryTest extends BaseTest {
+    String textExistTag;
     String header = data.getFakeHeader();
     String text = data.getFakeEntryText();
     String email = "monkkee_bloger@mailinator.com";
@@ -28,10 +29,9 @@ public class EntryTest extends BaseTest {
                 .checkAmountOfEntries();
         feedSteps
                 .checkThatTagOnTheEntry(textTag);
-
     }
 
-    @Test(priority = 5, description = "Проверка добавления существующего тега к записи")
+    @Test(priority = 5, description = "Проверка добавления существующего тега к записи '{textExistTag}'")
     @Description("Проверка добавления существующего тега к записи")
     public void checkAddingExistingTag() {
         User user = new User(email, password);
@@ -41,7 +41,7 @@ public class EntryTest extends BaseTest {
                 .openPage();
         entrySteps
                 .createEntry(header, text);
-        String textExistTag = entryPage.getRandomElement();
+        textExistTag = entryPage.getRandomElement();
         entrySteps
                 .selectExistingTag(textExistTag)
                 .checkExistingTagHasAdded(textExistTag)
